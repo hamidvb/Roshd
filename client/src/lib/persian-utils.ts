@@ -119,3 +119,39 @@ export function truncatePersianText(text: string, maxLength: number): string {
   if (text.length <= maxLength) return text;
   return text.substring(0, maxLength - 1) + '…';
 }
+
+export const generalMessages: Record<string, string> = {
+  notFoundTitle: "صفحه ۴۰۴ یافت نشد",
+  notFoundHint: "آیا فراموش کرده‌اید صفحه را به روتر اضافه کنید؟",
+  goHome: "بازگشت به صفحه اصلی",
+};
+
+export const componentLabels: Record<string, string> = {
+  growthChartsTitle: "ابعاد رشد (۸ بُعد)",
+  growthChartsViewAll: "مشاهده تمام ابعاد رشد",
+  progressChartTitle: "نمودار پیشرفت ماهانه",
+  monthly: "ماهانه",
+  weekly: "هفتگی",
+  overallGrowthLegend: "رشد کلی",
+  scientificGrowthLegend: "رشد علمی",
+  socialGrowthLegend: "رشد اجتماعی",
+  recentActivitiesTitle: "فعالیت‌های اخیر",
+  noActivitiesYet: "هنوز فعالیتی ثبت نشده است",
+  statsOverallGrowth: "میانگین کلی رشد",
+  statsCompletedActivities: "فعالیت‌های انجام شده",
+  statsParticipationScore: "امتیاز مشارکت",
+  statsActiveRecommendations: "توصیه‌های فعال",
+  statsComparedToLastMonth: "نسبت به ماه گذشته",
+  statsOutOf: "از",
+  statsTotalActivities: "فعالیت کل",
+  statsPointsThisWeek: "امتیاز این هفته",
+  statsPendingReview: "در انتظار بررسی",
+  // Note: Dynamic parts like +۵٪ and +۸ will be constructed in the component
+  // These are more like templates or parts of a sentence.
+  // For now, let's add them if they are meant to be static,
+  // but the instruction implies they might have dynamic numbers.
+  // For example, if it's always "+۵٪", then it's fine here.
+  // If the number changes, it should be constructed in the component.
+  // The instructions for stats-grid.tsx suggest dynamic construction.
+  // So, I will omit plusFivePercent and plusEightPoints from here.
+};

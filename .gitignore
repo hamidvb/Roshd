@@ -1,0 +1,43 @@
+# Dependencies
+node_modules
+dist
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Drizzle
+drizzle/meta/_journal.json
+drizzle/migrations/*
+
+# Build output
+build/
+dist/
+
+# Vite
+.vite/
+*.vite.config.*.timestamp-*
+
+# TSX cache
+.tsx/
+
+# nohup
+nohup.out

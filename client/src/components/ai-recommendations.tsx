@@ -57,9 +57,9 @@ export default function AIRecommendations({ recommendations }: AIRecommendations
         ) : (
           <div className="space-y-4">
             {displayRecommendations.map((recommendation, index) => {
-              const bgColor = index === 0 ? "bg-blue-50 border-r-4 border-primary" :
-                             index === 1 ? "bg-green-50 border-r-4 border-secondary" :
-                             "bg-orange-50 border-r-4 border-accent";
+              const bgColor = index === 0 ? "bg-blue-50 border-s-4 border-primary" :
+                             index === 1 ? "bg-green-50 border-s-4 border-secondary" :
+                             "bg-orange-50 border-s-4 border-accent";
               
               return (
                 <div key={recommendation.id} className={`p-4 rounded-lg ${bgColor}`}>
@@ -87,7 +87,7 @@ export default function AIRecommendations({ recommendations }: AIRecommendations
         <div className="mt-6 pt-4 border-t border-gray-100">
           <Button variant="ghost" className="w-full text-primary hover:bg-blue-50">
             مشاهده تمام توصیه‌ها
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft className="w-4 h-4 ms-2" />
           </Button>
         </div>
       </CardContent>

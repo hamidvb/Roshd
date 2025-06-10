@@ -124,7 +124,7 @@ export default function Landing() {
         <div className="text-center">
           <Button onClick={handleLogin} size="lg" className="text-lg px-8 py-4">
             ورود به سامانه
-            <GraduationCap className="w-5 h-5 mr-2" />
+            <GraduationCap className="w-5 h-5 ms-2" />
           </Button>
           <p className="text-sm text-gray-500 mt-4">
             با استفاده از حساب کاربری مدرسه وارد شوید

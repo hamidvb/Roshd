@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { componentLabels, toPersianNumbers } from "@/lib/persian-utils"; // Adjusted path
 
 interface GrowthChartsProps {
   growthData: Record<string, any[]>;
@@ -63,8 +64,8 @@ function ProgressChart({ canvasRef, percentage, color }: { canvasRef: React.RefO
     ctx.fillStyle = color;
     ctx.font = 'bold 16px Vazir';
     ctx.textAlign = 'center';
-    ctx.fillText(`${percentage}%`, centerX, centerY + 5);
-  }, [percentage, color]);
+    ctx.fillText(`${toPersianNumbers(percentage)}٪`, centerX, centerY + 5); // Used Persian percent U+066A
+  }, [percentage, color, toPersianNumbers]); // Added toPersianNumbers to dependency array
 
   return null;
 }
@@ -96,7 +97,7 @@ export default function GrowthCharts({ growthData }: GrowthChartsProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-xl font-bold text-gray-800">ابعاد رشد (۸ بُعد)</CardTitle>
+        <CardTitle className="text-xl font-bold text-gray-800">{componentLabels.growthChartsTitle}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-2 gap-6">
@@ -122,7 +123,7 @@ export default function GrowthCharts({ growthData }: GrowthChartsProps) {
                 className="text-2xl font-bold"
                 style={{ color: dimensionColors[index] }}
               >
-                {scores[index]}%
+                {toPersianNumbers(scores[index])}%
               </p>
             </div>
           ))}
@@ -130,8 +131,8 @@ export default function GrowthCharts({ growthData }: GrowthChartsProps) {
         
         <div className="mt-6 pt-4 border-t border-gray-100">
           <Button variant="ghost" className="w-full text-primary hover:bg-blue-50">
-            مشاهده تمام ابعاد رشد
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            {componentLabels.growthChartsViewAll}
+            <ArrowLeft className="w-4 h-4 ms-2" />
           </Button>
         </div>
       </CardContent>

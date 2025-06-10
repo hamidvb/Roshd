@@ -85,7 +85,7 @@ export default function Sidebar() {
             onClick={handleLogout}
             className="w-full justify-start text-gray-600 hover:text-gray-800"
           >
-            <LogOut className="w-4 h-4 ml-2" />
+            <LogOut className="w-4 h-4 ms-2" />
             خروج از سیستم
           </Button>
         </div>

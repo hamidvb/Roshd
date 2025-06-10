@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
+import { componentLabels, toPersianNumbers, persianMonths } from "@/lib/persian-utils";
 
 interface ProgressChartProps {
   studentId: number;
@@ -127,39 +128,38 @@ export default function ProgressChart({ studentId }: ProgressChartProps) {
     // Month labels
     months.forEach((month, index) => {
       const x = padding + (index / (months.length - 1)) * chartWidth;
-      const [year, monthNum] = month.split('-');
-      const monthNames = ['', 'فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
-      ctx.fillText(monthNames[parseInt(monthNum)] || month, x, padding + chartHeight + 30);
+      const [_year, monthNum] = month.split('-'); // year is not used
+      ctx.fillText(persianMonths[parseInt(monthNum)] || month, x, padding + chartHeight + 30);
     });
 
     // Y-axis labels
-    ctx.textAlign = 'right';
+    ctx.textAlign = 'right'; // Keep right for Y-axis labels to appear to the left of axis line
     for (let i = 0; i <= 10; i++) {
       const y = padding + chartHeight - (i / 10) * chartHeight;
-      ctx.fillText((i * 10).toString(), padding - 10, y + 4);
+      ctx.fillText(toPersianNumbers(i * 10), padding - 10, y + 4);
     }
 
-  }, [growthData]);
+  }, [growthData, toPersianNumbers]); // Added toPersianNumbers to dependency array
 
   return (
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="text-xl font-bold text-gray-800">نمودار پیشرفت ماهانه</CardTitle>
+          <CardTitle className="text-xl font-bold text-gray-800">{componentLabels.progressChartTitle}</CardTitle>
           <div className="flex items-center gap-2">
             <Button
               size="sm"
               variant={timeRange === "monthly" ? "default" : "outline"}
               onClick={() => setTimeRange("monthly")}
             >
-              ماهانه
+              {componentLabels.monthly}
             </Button>
             <Button
               size="sm"
               variant={timeRange === "weekly" ? "default" : "outline"}
               onClick={() => setTimeRange("weekly")}
             >
-              هفتگی
+              {componentLabels.weekly}
             </Button>
           </div>
         </div>
@@ -177,15 +177,15 @@ export default function ProgressChart({ studentId }: ProgressChartProps) {
         <div className="flex items-center justify-center gap-6 mt-4 text-sm">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-primary rounded-full"></div>
-            <span>رشد کلی</span>
+            <span>{componentLabels.overallGrowthLegend}</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-accent rounded-full"></div>
-            <span>رشد علمی</span>
+            <span>{componentLabels.scientificGrowthLegend}</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-secondary rounded-full"></div>
-            <span>رشد اجتماعی</span>
+            <span>{componentLabels.socialGrowthLegend}</span>
           </div>
         </div>
       </CardContent>

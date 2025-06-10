@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Book, Users, Palette, Clock } from "lucide-react";
+import { componentLabels, getTimeAgoPersian } from "@/lib/persian-utils";
 
 interface RecentActivitiesProps {
   activities: any[];
@@ -25,20 +26,7 @@ const getActivityColor = (type: string, completed: boolean) => {
   }
 };
 
-const getTimeAgo = (date: string) => {
-  const now = new Date();
-  const created = new Date(date);
-  const diffInHours = Math.floor((now.getTime() - created.getTime()) / (1000 * 3600));
-  
-  if (diffInHours < 1) return "اکنون";
-  if (diffInHours < 24) return `${diffInHours} ساعت پیش`;
-  
-  const diffInDays = Math.floor(diffInHours / 24);
-  if (diffInDays === 1) return "دیروز";
-  if (diffInDays < 7) return `${diffInDays} روز پیش`;
-  
-  return `${Math.floor(diffInDays / 7)} هفته پیش`;
-};
+// Removed local getTimeAgo function
 
 export default function RecentActivities({ activities }: RecentActivitiesProps) {
   const displayActivities = activities?.slice(0, 4) || [];
@@ -46,13 +34,13 @@ export default function RecentActivities({ activities }: RecentActivitiesProps) 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-xl font-bold text-gray-800">فعالیت‌های اخیر</CardTitle>
+        <CardTitle className="text-xl font-bold text-gray-800">{componentLabels.recentActivitiesTitle}</CardTitle>
       </CardHeader>
       <CardContent>
         {displayActivities.length === 0 ? (
           <div className="text-center py-8">
             <Clock className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-500">هنوز فعالیتی ثبت نشده است</p>
+            <p className="text-gray-500">{componentLabels.noActivitiesYet}</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -67,7 +55,7 @@ export default function RecentActivities({ activities }: RecentActivitiesProps) 
                   </div>
                   <div className="flex-1">
                     <p className="text-sm font-medium text-gray-800">{activity.title}</p>
-                    <p className="text-xs text-gray-500">{getTimeAgo(activity.createdAt)}</p>
+                    <p className="text-xs text-gray-500">{getTimeAgoPersian(activity.createdAt)}</p>
                   </div>
                 </div>
               );
